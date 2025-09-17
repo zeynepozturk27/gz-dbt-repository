@@ -18,22 +18,35 @@ sources:
             description: the amount paid by the customer to purchase the product. revenue = quantity * selling_price
           - name: quantity
             description: the quantity of products purchased for a given order
+        tests:
+          - unique:
+              column_name: "(orders_id || '-' || pdt_id)"
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - orders_id
+                - pdt_id
 
       - name: product
         identifier: raw_gz_product
-        description: products of Greenweez
+        description: Greenweez'in ürünleri
         columns:
           - name: products_id
-            description: Primary key
+            description: Birincil anahtar
+            tests:
+              - unique
+              - not_null
           - name: purchase_price
             description: the purchase price of the product
 
       - name: ship
         identifier: raw_gz_ship
-        description: shipping data for Greenweez orders
+        description: Greenweez siparişleri için nakliye verileri
         columns:
           - name: orders_id
-            description: Primary key
+            description: Birincil anahtar
+            tests:
+              - unique
+              - not_null
           - name: shipping_fee
             description: the price the customer pays for shipping
           - name: log_cost
