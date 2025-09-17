@@ -1,8 +1,7 @@
 with sales as (
     select
         orders_id,
-        -- kaynakta pdt_id var; burada products_id'ye çeviriyoruz
-        pdt_id as products_id,
+        pdt_id as products_id,   -- stg_raw__sales’ten geliyor
         date_date,
         quantity,
         revenue
@@ -24,7 +23,9 @@ joined as (
         s.quantity,
         s.revenue,
         p.purchase_price,
+        -- satın alma maliyeti burada hesaplanıyor
         s.quantity * p.purchase_price as purchase_cost,
+        -- marj = gelir - maliyet
         s.revenue - (s.quantity * p.purchase_price) as margin
     from sales s
     left join product p
