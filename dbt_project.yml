@@ -43,3 +43,5 @@ models:
     # Applies to all files under models/mart/
     mart:
       +materialized: table
+      finance:
+        +schema: finance_mart   # mart/finance klasöründeki modeller bu dataset'e yazılacak
