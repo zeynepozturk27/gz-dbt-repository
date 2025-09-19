@@ -1,12 +1,12 @@
 with campaigns as (
 
-    select * from {{ ref('stg_adwords') }}
+    select * from {{ ref('stg_raw__adwords') }}
     union all
-    select * from {{ ref('stg_bing') }}
+    select * from {{ ref('stg_raw__bing') }}
     union all
-    select * from {{ ref('stg_criteo') }}
+    select * from {{ ref('stg_raw__criteo') }}
     union all
-    select * from {{ ref('stg_facebook') }}
+    select * from {{ ref('stg_raw__facebook') }}
 
 )
 
